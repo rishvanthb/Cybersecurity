@@ -1,0 +1,50 @@
+<html>
+    <body>
+        
+        <video autoplay muted loop  id = "errorVideo">
+            <source src = "5364-183788428_small.mp4" type = "video/mp4">
+        </video>
+        <h1 class = "overlay">
+            SORRY..........YOU HAVE PRESSED AN INCORRECT ANSWER.
+        </h1>
+        <div class = "audio">
+            <audio controls autoplay id = "womp">
+                <source src = "wah-wah-sad-trombone-6347.mp3" type = "audio/mpeg">
+            </audio>
+        </div>
+        <button onclick = "document.getElementById('womp').play()" class = "buttonFront" >
+            Press Me!
+        </button>
+    </body>
+    <style>
+        h1{
+            position: relative;
+            color: white;
+            font-size: 75px;
+        }
+        .overlay {
+            text-align: center;
+            top: 200px;
+        }
+        #errorVideo{
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-width: 100%;
+        }
+        .buttonFront {
+            position: relative;
+            color: black;
+            font-size: large;
+            left: 545px;
+            top: 200px;
+            width: 200px;
+            height: 50px;
+        }
+        .audio {
+            position: relative;
+            bottom: 500px;
+        }
+    </style>
+</html>
