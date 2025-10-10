@@ -1,2 +1,2 @@
 # Cybersecurity
-Cybersecurity Awareness Month: Cyber-scavenger Hunt
+Cybersecurity Awareness Month: Cyber-Scavenger Hunt
