@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+  <title>
+    500 Too Many Requests.
+  </title>
+</head>
+<body>
+    <style>
+        a:link, a:visited, a:hover, a:active {
+          color: black;
+        }
+        body {
+          overflow: hidden;
+        }
+      </style>
+  
+    <div style = "text-align: center;">
+      <h1 class = "decoy">
+        502 Bad Gateway
+      </h1> 
+    </div>
+    
+    <hr>
+    <p style = "text-align: center;">
+      sgjsn12
+    </p>
+    <div class = "right">
+      <p>
+        What is an item that has one curved handle with a cap on top that pours a liquid?
+        Some say it is a teapot, others say it is a mug with a cap. I do not know. What I am is for 
+        you to decide. Find the number I most abide by and drop it below...Type one mistake and you will bemoan.
+      </p>
+      <input type = "text" id = "secret"> 
+      <button id = "myButton">
+        Press Enter
+      </button>
+ 
+    </div>
+    
+    <script>
+          const button = document.getElementById("myButton");
+       
+          button.addEventListener("click", function() {
+            const secretMessage = document.getElementById("secret").value.trim();
+            if (secretMessage == "418"){ 
+            window.location.replace("../418/index.html")
+          }
+            if (secretMessage != "418"){
+            console.log("You got it wrong!")
+            window.location.replace("../Sorry_Website/index.html")
+          }
+        });
+          
+    </script>
+</body>
+
+<style>
+  .decoy{
+    font-weight: bold;
+  }
+
+  .right{
+    position: absolute;
+    left: 1500px;
+  }
+  
+</style>
+
+
+
