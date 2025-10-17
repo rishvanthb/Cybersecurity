@@ -1,35 +1,144 @@
-<!Doctype HTML>
-<html>
-<head>
-</head>
-<body>
-    <h1 id="x7q9z"></h1>
-    <hr>
-    <p style="color: white; user-select: none;" id="y3k2m"></p>
-    <p style="font-size: 28px;" id="z8n4p"></p>
-    <h2 id="w5t1r"></h2>
-    <p style="font-size: 22px;" id="v2j6x"><span style="font-size: 25px;" id="u9m3y"></span></p>
-    <h2 id="t4k8q"></h2>
-    <p style="font-size: 22px;" id="s1h7n"></p>
-    <h2 id="r6p2t"></h2>
-    <p style="font-size: 22px;" id="q3v5m"><span style="font-size: 25px;" id="p8w4z"></span></p>
-    <p id="n2r9k"></p>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><html>
+    <head>
+        <title>
+            Encryption and Quantum Computing
+        </title>
+    </head>
+    <style>
+        body {
+            overflow: hidden;
+            background-color: #ccb576;
+        }
+        p {
+            overflow-wrap: break-word;
+        }
+    </style>
+    <body id="cool-bg">
+        <div style="text-align: center;">
+            <button id="k9w2q">
+                Press for a hint.
+            </button>
+            <br>
+            <br>
+            <button id="m3z7r">
+                Press for a hint.
+            </button>
+            <br>
+            <br>
+            <button id="p8x4t">
+                Press for a hint.
+            </button>
+        </div>
+        
+        <div style="text-align: center;">
+            <p>Type answer to question 1:</p>
+            <input id="v1y6s">
+            <br>
+            <p>Type answer to question 2:</p>
+            <input id="q2n5u">
+            <br>
+            <p>Type answer to question 3:</p>
+            <input id="t7m3w">
+            <br>
+            <br>
+            <button id="r4k8p">
+                Click enter for all your answers!
+            </button>
+        </div>
+        
+    </body>
     <script>
-        const f9x3j = {
-            x7q9z: atob("IzUgVGhyZWF0cyB0byBDeWJlcnNlY3VyaXR5"),
-            y3k2m: atob("VGhlIHNlY3JldCBwYXNzd29yZCBpcyBGSVJFV0FMTA=="),
-            z8n4p: atob("V2l0aCBtdWNoIG9mIG91ciB3b3JsZCBiZWluZyBvbmxpbmUsIHRoZXJlIGV4aXN0IG1hbnkgcmlza3MgYXNzb2NpYXRlZCB3aXRoIG91ciBpbnRlcmFjdGlvbnMgb24gdGhlIGludGVybmV0LiBUaGVzZSB0aHJlYXRzIGFyZSBvZnRlbiB3aXRoIHRoZSBjb21tb24gZ29hbCBvZiBzdGVhbGluZyBvdXIgaW5mb3JtYXRpb246IGJhbmsgYWNjb3VudHMsIGlkZW50aXR5LCBhZGRyZXNzLCBhbmQgbXVjaCBtb3JlLiBWaXJ1c2VzLCBNYWx3YXJlLCBhbmQgUGhpc2hpbmcgYXJlIGFtb25nIHRoZSBtb3N0IGNvbW1vbiB0aHJlYXRzLg=="),
-            w5t1r: atob("VmlydXM="),
-            v2j6x: atob("QSB2aXJ1cyBpcyBhIG1hbGljaW91cyBwcm9ncmFtIHRoYXQgYXR0YWNoZXMgaXRzZWxmIHRvIG90aGVyIGZpZWxkcyBvciBzb2Z0d2FyZSBhbmQgc3ByZWFkcyBvbmNlIHRob3NlIGZpbGVzIGFyZSBzaGFyZWQgb3Igb3BlbmVkLCBzaW1pbGFyIHRvIGhvdyBzZWNyZXRzIGFyZQ=="),
-            u9m3y: atob("YmVzdCBoZWFyZCwgbm90IHNlZW4="),
-            t4k8q: atob("TWFsd2FyZQ=="),
-            s1h7n: atob("TWFsd2FyZSBpcyBhIGJyb2FkIHRlcm0gZGVzY3JpYmluZyBkaWZmZXJlbnQgImRldmljZXMiIGRlc2lnbmVkIHRvIGhhcm0gY29tcHV0ZXJzIG9yIGFjY2VzcyBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24gc3VjaCBhcyB2aXJ1c2VzLCB3b3Jtcywgc3B5d2FyZSwgcmFuc29td2FyZSwgYW5kIG11Y2ggbW9yZS4gU2lnbnMgYSBkZXZpY2UgaXMgaW5mZWN0ZWQgd2l0aCBtYWx3YXJlIHRlbmQgdG8gdmFyeSwgYnV0IGl0IGlzIG9mdGVuIHRvb2wgbGF0ZSB0byBkbyBhbnl0aGluZyBvbmNlIGl0IGhhcyBiZWVuIGluc3RhbGxlZC4="),
-            r6p2t: atob("UGhpc2hpbmc="),
-            q3v5m: atob("UGhpc2hpbmcsIG9uIHRoZSBvdGhlciBoYW5kLCBpcyBhIGh1bWFuIGluaXRpYXRlZCBhdHRhY2sgd2hlcmUgc2NhbW1lcnMgYW5kIGhhY2tlcnMgdHJpY2sgcGVvcGxlIGludG8gcmV2ZWFsaW5nIHNlbnNpdGl2ZSBpbmZvcm1hdGlvbiBzdWNoIGFzIHlvdXIgcGFzc3dvcmRzIG9yIGNyZWRpdCBjYXJkIG51bWJlci4gVGhlc2Ugb2Z0ZW4gY29tZSBpbiB0aGUgZm9ybSBvZiBza2V0Y2h5IFVSTHMsIHNoYWR5IGVtYWlscywgb3IgZmlzaHkgd2Vic2l0ZXMgd2hpY2ggYWxsIHByZXRlbmQgdG8gYmUgdHJ1c3RlZCBvcmdhbml6YXRpb25zLiA="),
-            p8w4z: atob("U29tZXRpbWVzLCB0cmlja3MgY2FuJ3QgYmUgc2VlbiBhbmQgaXQncyBiZXN0IHRvIHJlYWQgdGhlbSBhbG91ZC4="),
-            n2r9k: atob("LS4tLiAt.-. --- -- . / .. ... / -. --- - / - .... . / .-- .- -.--")
-        };
-        Object.keys(f9x3j).forEach(k => document.getElementById(k).innerText = f9x3j[k]);
+        const x6j9z = [
+            atob("YQ=="), atob("ZA=="), atob("dg=="), atob("YQ=="), atob("bg=="),
+            atob("dA=="), atob("YQ=="), atob("Zw=="), atob("ZQ=="), atob("Mg==")
+        ];
+        let f2h7m = [];
+        const w8q3t = document.getElementById("k9w2q");
+        const y5r1k = document.getElementById("r4k8p");
+        const z9n4v = document.getElementById("v1y6s");
+        const b3t2x = document.getElementById("q2n5u");
+        const c6m7p = document.getElementById("t7m3w");
+        const d1k8r = document.getElementById("p8x4t");
+
+        d1k8r.addEventListener("click", function() {
+            alert(atob("VXNlIGNyeXB0aWku"));
+        });
+
+        z9n4v.addEventListener("click", function() {
+            window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        });
+        b3t2x.addEventListener("click", function() {
+            window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        });
+        c6m7p.addEventListener("click", function() {
+            window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        });
+        w8q3t.addEventListener("click", function() {
+            window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        });
+        y5r1k.addEventListener("click", function() {
+            window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        });
+
+        window.addEventListener("keydown", function(e) {
+            f2h7m.push(e.key);
+            if (f2h7m.length > x6j9z.length) {
+                f2h7m.shift();
+            }
+            console.log(atob("S2V5IHByZXNzZWQ6"), e.key);
+            console.log(atob("Q3VycmVudCBpbnB1dDo="), f2h7m);
+            if (f2h7m.toString() === x6j9z.toString()) {
+                g4t9q();
+                f2h7m = [];
+            }
+        });
+
+        function g4t9q() {
+            window.location.replace(atob("Li4vZmluYWx2aWN0b3J5L2luZGV4Lmh0bWw="));
+        }
+
+        const n2p6v = document.getElementById("m3z7r");
+        n2p6v.addEventListener("click", function() {
+            alert(atob("U29tZSBvZiB0aGUgZ3JlYXRlc3QgdGhpbmtlcnMgb2YgYWxsIHRpbWUgY2FtZSBmcm9tIEdyZWVjZS4gQ29uc2lkZXIgQXJjaGltZWRlcywgRXVkb3h1cywgRXJhdG9zdGhvbmVzLCBQb2x5Yml1cywgYW5kIG1hbnkgbW9yZS4gRG8geW91IHRoaW5rIHRoZXkgY291bGQgaGF2ZSBjb21lIHVwIHdpdGggcXVhbnR1bSBjb21wdXRpbmc/IEF0IGxlYXN0IHNvbWUgZW5jcnlwdGlvbiBzY2hlbWU/IFdlbGwsIHJlbWVtYmVyIHRoYXQgdGhlIGludGVnZXIgYWJvdmUgbWF5IG5vdCBoYXZlIHRoZSBkaW1lbnNpb25zIG9mIGEgc3F1YXJlLCBidXQgaXQgY291bGQgYmUgdGhlIGFyZWEgb2Ygb25lLg=="));
+        });
     </script>
-</body>
 </html>
