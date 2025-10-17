@@ -1,28 +1,68 @@
-<html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><html>
     <head>
         <title>
             Data is Everywhere
         </title>
     </head>
     <body>
-        <video autoplay muted loop  id = "dataVideo">
-            <source src = "307675_small.mp4" type = "video/mp4">
+        <video autoplay muted loop id="dataVideo">
+            <source src="307675_small.mp4" type="video/mp4">
         </video>
         <div>
-            <h1 class = "align">
+            <h1 class="align">
                 Data is Everywhere!
             </h1>
             <h2>
                 Data is everywhere. From your bank account to your email and password, data is ubiquitous.
                 As you know, there are primarily two main types of data. There is qualitative and quantative data.
-                Qualitative can be described numerically. For example, if the console prints out "Mandlebrot Set has 
+                Quantative data can be described numerically. For example, if the CONSOLE prints out "Mandlebrot Set has 
                 a magnitude of 15 degree celsius", that data would be quantative. Although its meaning is very questionable.
 
          
                 Qualatative data refers to items that cannot be expressed numerically. For example, consider the taste of a lemon. We 
-                can say that it is sour. For example, if I searched up on the internet how to classify sourness it would probably give me the chemical composition
-                of the acidity of a sour object. Now, for the purposes of this activity, we can ignore the classification concept and consider the abstract idea of sourness.
-                We can all taste it, but "never" quantify it. The lemon is sour would for our cases be qualitative.
+                can say that it is sour. This is a feeling that cannot be measured objectively. The abstract idea is that you cannot quantify 
+                it.
+
+                Today Data is becoming increasingly valuable, so it is important to safeguard it. That's why learning about cybersecurity is very important!
             </h2>
         </div>
     </body>
@@ -38,7 +78,7 @@
             position: relative;
             color: white;
         }
-        .align{
+        .align {
             text-align: center;
         }
         h2 {
@@ -46,13 +86,15 @@
             color: white;
             bottom: -100px;
         }
-
     </style>
     <script>
-        console.log("Good job finding where the answer is hidden. As you see, math is the theme for this webpage. ")
-        console.log("What does the P in IP stand for?")
-        console.log("The answer will help lead you to the next page.")
-        console.log("Until then, good luck watching the Mandlebrot set!")
-
+        const p9r3x = atob("R29vZCBqb2IgZmluZGluZyB3aGVyZSB0aGUgYW5zd2VyIGlzIGhpZGRlbi4=");
+        const q2m7y = atob("V2hhdCBkb2VzIHRoZSBQIGluIElQIHN0YW5kIGZvcj8=");
+        const r5k8z = atob("VGhlIGFuc3dlciB3aWxsIGhlbHAgbGVhZCB5b3UgdG8gdGhlIG5leHQgcGFnZS4=");
+        const s1t4w = atob("VW50aWwgdGhlbiwgZ29vZCBsdWNrIHdhdGNoaW5nIHRoZSBNYW5kbGVicm90IHNldCE=");
+        console.log(p9r3x);
+        console.log(q2m7y);
+        console.log(r5k8z);
+        console.log(s1t4w);
     </script>
 </html>
