@@ -1,69 +1,108 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <head>
   <title>
-    500 Too Many Requests.
+    502 Bad Gateway
   </title>
 </head>
 <body>
     <style>
         a:link, a:visited, a:hover, a:active {
-          color: black;
+          color: #000;
         }
         body {
           overflow: hidden;
         }
-      </style>
+    </style>
   
-    <div style = "text-align: center;">
-      <h1 class = "decoy">
+    <div style="text-align:center">
+      <h1 class="x9a2b">
         502 Bad Gateway
       </h1> 
     </div>
     
     <hr>
-    <p style = "text-align: center;">
+    <p style="text-align:center">
       sgjsn12
     </p>
-    <div class = "right">
+    <div class="q7w4e">
       <p>
-        What is an item that has one curved handle with a cap on top that pours a liquid?
-        Some say it is a teapot, others say it is a mug with a cap. I do not know. What I am is for 
-        you to decide. Find the number I most abide by and drop it below...Type one mistake and you will bemoan.
+        What is an item that has one curved handle with a cap on top that pours a steaming hot liquid?
+        Some say it is a teapot, others say it is a mug with a cap and a hole. Personally, I do not know if I am what people say. What I am is for 
+        you to decide, and figure out the clue hidden inside. Find the number I most abide by and drop it below...type one mistake and you will bemoan.
       </p>
-      <input type = "text" id = "secret"> 
-      <button id = "myButton">
-        Press Enter
-      </button>
- 
+      <input type="text" id="z3m8k"> 
+      <div id="btnContainer"></div>
     </div>
     
     <script>
-          const button = document.getElementById("myButton");
-       
-          button.addEventListener("click", function() {
-            const secretMessage = document.getElementById("secret").value.trim();
-            if (secretMessage == "418"){ 
-            window.location.replace("../418/index.html")
-          }
-            if (secretMessage != "418"){
-            console.log("You got it wrong!")
-            window.location.replace("../Sorry_Website/index.html")
-          }
-        });
-          
+      const btnId = atob("cDZ2OW4=");
+      const btnText = atob("UHJlc3MgRW50ZXI=");
+      const btnContainer = document.getElementById("btnContainer");
+      btnContainer.innerHTML = `<button id="${btnId}">${btnText}</button>`;
+      
+      const k4j2x = document.getElementById(btnId);
+      k4j2x.addEventListener("click", function() {
+        const r8t5q = document.getElementById("z3m8k").value.trim();
+        const encodedInput = btoa(r8t5q);
+        if (encodedInput === "NDE4") {
+          window.location.replace(atob("Li4vNDE4L2luZGV4Lmh0bWw="));
+        }
+        if (encodedInput !== "NDE4") {
+          console.log("You got it wrong!");
+          window.location.replace(atob("Li4vU29ycnlfV2Vic2l0ZS9pbmRleC5odG1s"));
+        }
+      });
     </script>
 </body>
 
 <style>
-  .decoy{
+  .x9a2b {
     font-weight: bold;
   }
 
-  .right{
+  .q7w4e {
     position: absolute;
     left: 1500px;
   }
-  
 </style>
 
 
